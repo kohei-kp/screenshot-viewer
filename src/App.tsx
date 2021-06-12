@@ -1,24 +1,43 @@
-import { FC } from 'react';
-import logo from './logo.svg';
+import { VFC } from 'react';
 import './App.css';
+import { Card, Image } from 'semantic-ui-react';
 
-const App: FC = () => (
+type Screenshot = {
+  id: number;
+  name: string;
+  url: string;
+  path: string;
+};
+
+const App: VFC = () => {
+  const screenshots: Screenshot[] = [
+    {
+      id: 1,
+      name: 'Screenshot1',
+      url: 'http://example.com/image1.png',
+      path: './assets/screenshot/image1.png',
+    },
+    {
+      id: 2,
+      name: 'Screenshot2',
+      url: 'http://example.com/imagew.png',
+      path: './assets/screenshot/image1.png',
+    },
+  ];
+
+  return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit<code>src/App.tsx</code>and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {screenshots.map((screenshot) => (
+        <Card>
+          <Image src={screenshot.path} wrapped ui={false} />
+          <Card.Content>
+            <Card.Header>{screenshot.name}</Card.Header>
+            <Card.Description>{screenshot.url}</Card.Description>
+          </Card.Content>
+        </Card>
+      ))}
     </div>
   );
+};
 
 export default App;
